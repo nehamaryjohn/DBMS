@@ -1,0 +1,274 @@
+create table employee(emp_no int primary key,emp_name varchar(50) not null,dob date not null,designation varchar(25) not null,mob_no int not null,dept_no int not null,salary int not null);
+desc employee;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| emp_name     | varchar(20) | NO   |     | NULL    |       |
+| dob          | date        | YES  |     | NULL    |       |
+| address_text | varchar(20) | NO   |     | NULL    |       |
+| mobile_no    | int         | NO   |     | NULL    |       |
+| dept_no      | varchar(20) | YES  |     | NULL    |       |
+| salary       | int         | NO   |     | NULL    |       |
+| designaton   | varchar(50) | YES  |     | NULL    |       |
+| emp_no       | varchar(15) | NO   | PRI | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+insert into employee values("Neha",'2002-01-08',"Muriyanthara",874537623,101,25000,"Manager","e01");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into employee values("Nivya",'1998-12-04',"Parakkal",56753635,102,46000,"HR","e02");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into employee values("Aneeta",'1999-7-12',"Joe Villa",90763547,103,35480,"Analyst","e03");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into employee values("Veena",'1990-5-26',"Kalarikkal",945623728,104,29462,"HR","e04");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into employee values("Mariya",'2001-5-15',"Mariyidam",89754678,105,25000,"Manager","e05");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into employee values("Geethu",'1997-8-25',"Palakal",7975947858,106,23678,"Typist","e06");
+ERROR 1264 (22003): Out of range value for column 'mobile_no' at row 1
+mysql> insert into employee values("Geethu",'1997-8-25',"Palakal",797594785,106,23678,"Typist","e06");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into employee values("Joseph",'2005-10-31',"Parambil",476857895,107,36000,"Analyst","e07");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into employee values("Alen",'2000-1-30',"Kiriyil",563864734,108,45900,"Manager","e08");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into employee values("Anu",'1990-4-18',"Edamana",98657373,109,37000,"Clerk","e09");
+Query OK, 1 row affected (0.01 sec)
+select * from employee;
++----------+------------+--------------+-----------+---------+--------+------------+--------+
+| emp_name | dob        | address_text | mobile_no | dept_no | salary | designaton | emp_no |
++----------+------------+--------------+-----------+---------+--------+------------+--------+
+| Neha     | 2002-01-08 | Muriyanthara | 874537623 | 101     |  25000 | Manager    | e01    |
+| Nivya    | 1998-12-04 | Parakkal     |  56753635 | 102     |  46000 | HR         | e02    |
+| Aneeta   | 1999-07-12 | Joe Villa    |  90763547 | 103     |  35480 | Analyst    | e03    |
+| Veena    | 1990-05-26 | Kalarikkal   | 945623728 | 104     |  29462 | HR         | e04    |
+| Mariya   | 2001-05-15 | Mariyidam    |  89754678 | 105     |  25000 | Manager    | e05    |
+| Geethu   | 1997-08-25 | Palakal      | 797594785 | 106     |  23678 | Typist     | e06    |
+| Joseph   | 2005-10-31 | Parambil     | 476857895 | 107     |  36000 | Analyst    | e07    |
+| Alen     | 2000-01-30 | Kiriyil      | 563864734 | 108     |  45900 | Manager    | e08    |
+| Anu      | 1990-04-18 | Edamana      |  98657373 | 109     |  37000 | Clerk      | e09    |
++----------+------------+--------------+-----------+---------+--------+------------+--------+
+9 rows in set (0.00 sec)
+
+mysql> select emp_no,emp_name from employee where dept_no=102;
++--------+----------+
+| emp_no | emp_name |
++--------+----------+
+| e02    | Nivya    |
++--------+----------+
+1 row in set (0.00 sec)
+select emp_no,emp_name,designaton,dept_no,salary  from employee order by salary desc;
++--------+----------+------------+---------+--------+
+| emp_no | emp_name | designaton | dept_no | salary |
++--------+----------+------------+---------+--------+
+| e02    | Nivya    | HR         | 102     |  46000 |
+| e08    | Alen     | Manager    | 108     |  45900 |
+| e09    | Anu      | Clerk      | 109     |  37000 |
+| e07    | Joseph   | Analyst    | 107     |  36000 |
+| e03    | Aneeta   | Analyst    | 103     |  35480 |
+| e04    | Veena    | HR         | 104     |  29462 |
+| e01    | Neha     | Manager    | 101     |  25000 |
+| e05    | Mariya   | Manager    | 105     |  25000 |
+| e06    | Geethu   | Typist     | 106     |  23678 |
++--------+----------+------------+---------+--------+
+9 rows in set (0.00 sec)
+
+mysql> select emp_no,emp_name from employee where salary=20000 and salary=50000;
+Empty set (0.00 sec)
+
+mysql> select distinct designaton from employee;
++------------+
+| designaton |
++------------+
+| Manager    |
+| HR         |
+| Analyst    |
+| Typist     |
+| Clerk      |
++------------+
+5 rows in set (0.00 sec)
+
+mysql> update employee set salary=45000 where designaton='Manager';
+Query OK, 3 rows affected (0.01 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql> select * from employee;
++----------+------------+--------------+-----------+---------+--------+------------+--------+
+| emp_name | dob        | address_text | mobile_no | dept_no | salary | designaton | emp_no |
++----------+------------+--------------+-----------+---------+--------+------------+--------+
+| Neha     | 2002-01-08 | Muriyanthara | 874537623 | 101     |  45000 | Manager    | e01    |
+| Nivya    | 1998-12-04 | Parakkal     |  56753635 | 102     |  46000 | HR         | e02    |
+| Aneeta   | 1999-07-12 | Joe Villa    |  90763547 | 103     |  35480 | Analyst    | e03    |
+| Veena    | 1990-05-26 | Kalarikkal   | 945623728 | 104     |  29462 | HR         | e04    |
+| Mariya   | 2001-05-15 | Mariyidam    |  89754678 | 105     |  45000 | Manager    | e05    |
+| Geethu   | 1997-08-25 | Palakal      | 797594785 | 106     |  23678 | Typist     | e06    |
+| Joseph   | 2005-10-31 | Parambil     | 476857895 | 107     |  36000 | Analyst    | e07    |
+| Alen     | 2000-01-30 | Kiriyil      | 563864734 | 108     |  45000 | Manager    | e08    |
+| Anu      | 1990-04-18 | Edamana      |  98657373 | 109     |  37000 | Clerk      | e09    |
++----------+------------+--------------+-----------+---------+--------+------------+--------+
+9 rows in set (0.00 sec)
+
+mysql> update employee set salary=45000 where designaton='Manager';
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 3  Changed: 0  Warnings: 0
+
+mysql> update employee set mobile_no=874655287 where emp_name='Veena';
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from employee;
++----------+------------+--------------+-----------+---------+--------+------------+--------+
+| emp_name | dob        | address_text | mobile_no | dept_no | salary | designaton | emp_no |
++----------+------------+--------------+-----------+---------+--------+------------+--------+
+| Neha     | 2002-01-08 | Muriyanthara | 874537623 | 101     |  45000 | Manager    | e01    |
+| Nivya    | 1998-12-04 | Parakkal     |  56753635 | 102     |  46000 | HR         | e02    |
+| Aneeta   | 1999-07-12 | Joe Villa    |  90763547 | 103     |  35480 | Analyst    | e03    |
+| Veena    | 1990-05-26 | Kalarikkal   | 874655287 | 104     |  29462 | HR         | e04    |
+| Mariya   | 2001-05-15 | Mariyidam    |  89754678 | 105     |  45000 | Manager    | e05    |
+| Geethu   | 1997-08-25 | Palakal      | 797594785 | 106     |  23678 | Typist     | e06    |
+| Joseph   | 2005-10-31 | Parambil     | 476857895 | 107     |  36000 | Analyst    | e07    |
+| Alen     | 2000-01-30 | Kiriyil      | 563864734 | 108     |  45000 | Manager    | e08    |
+| Anu      | 1990-04-18 | Edamana      |  98657373 | 109     |  37000 | Clerk      | e09    |
++----------+------------+--------------+-----------+---------+--------+------------+--------+
+9 rows in set (0.00 sec)
+
+select emp_name,mobile_no from employee where emp_name like 'A%';
++----------+-----------+
+| emp_name | mobile_no |
++----------+-----------+
+| Aneeta   |  90763547 |
+| Alen     | 563864734 |
+| Anu      |  98657373 |
++----------+-----------+
+3 rows in set (0.01 sec)
+
+mysql> select * from employee where length(emp_name)>=3 and salary>2000;
++----------+------------+--------------+-----------+---------+--------+------------+--------+
+| emp_name | dob        | address_text | mobile_no | dept_no | salary | designaton | emp_no |
++----------+------------+--------------+-----------+---------+--------+------------+--------+
+| Neha     | 2002-01-08 | Muriyanthara | 874537623 | 101     |  45000 | Manager    | e01    |
+| Nivya    | 1998-12-04 | Parakkal     |  56753635 | 102     |  46000 | HR         | e02    |
+| Aneeta   | 1999-07-12 | Joe Villa    |  90763547 | 103     |  35480 | Analyst    | e03    |
+| Veena    | 1990-05-26 | Kalarikkal   | 874655287 | 104     |  29462 | HR         | e04    |
+| Mariya   | 2001-05-15 | Mariyidam    |  89754678 | 105     |  45000 | Manager    | e05    |
+| Geethu   | 1997-08-25 | Palakal      | 797594785 | 106     |  23678 | Typist     | e06    |
+| Joseph   | 2005-10-31 | Parambil     | 476857895 | 107     |  36000 | Analyst    | e07    |
+| Alen     | 2000-01-30 | Kiriyil      | 563864734 | 108     |  45000 | Manager    | e08    |
+| Anu      | 1990-04-18 | Edamana      |  98657373 | 109     |  37000 | Clerk      | e09    |
++----------+------------+--------------+-----------+---------+--------+------------+--------+
+9 rows in set (0.00 sec)
+select * from employee where emp_no in('e01','e02','e07');
++----------+------------+--------------+-----------+---------+--------+------------+--------+
+| emp_name | dob        | address_text | mobile_no | dept_no | salary | designaton | emp_no |
++----------+------------+--------------+-----------+---------+--------+------------+--------+
+| Neha     | 2002-01-08 | Muriyanthara | 874537623 | 101     |  45000 | Manager    | e01    |
+| Nivya    | 1998-12-04 | Parakkal     |  56753635 | 102     |  46000 | HR         | e02    |
+| Joseph   | 2005-10-31 | Parambil     | 476857895 | 107     |  36000 | Analyst    | e07    |
++----------+------------+--------------+-----------+---------+--------+------------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select emp_name,emp_no from employee where salary =1000 and 3000;
+Empty set (0.00 sec)
+
+mysql> select emp_name,emp_no from employee where salary =10000 and 30000;
+Empty set (0.00 sec)
+
+mysql> select emp_name,emp_no from employee where salary between 10000 and 30000;
++----------+--------+
+| emp_name | emp_no |
++----------+--------+
+| Veena    | e04    |
+| Geethu   | e06    |
++----------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select * from employee where designaton= 'Manager' or 'Analyst';
++----------+------------+--------------+-----------+---------+--------+------------+--------+
+| emp_name | dob        | address_text | mobile_no | dept_no | salary | designaton | emp_no |
++----------+------------+--------------+-----------+---------+--------+------------+--------+
+| Neha     | 2002-01-08 | Muriyanthara | 874537623 | 101     |  45000 | Manager    | e01    |
+| Mariya   | 2001-05-15 | Mariyidam    |  89754678 | 105     |  45000 | Manager    | e05    |
+| Alen     | 2000-01-30 | Kiriyil      | 563864734 | 108     |  45000 | Manager    | e08    |
++----------+------------+--------------+-----------+---------+--------+------------+--------+
+3 rows in set, 1 warning (0.01 sec)
+select designaton,count(*)as employee_count from employee group by designaton;
++------------+----------------+
+| designaton | employee_count |
++------------+----------------+
+| Manager    |              3 |
+| HR         |              2 |
+| Analyst    |              2 |
+| Typist     |              1 |
+| Clerk      |              1 |
++------------+----------------+
+5 rows in set (0.00 sec)
+
+select designaton,avg(salary)as average_salary from employee group by designaton;
++------------+----------------+
+| designaton | average_salary |
++------------+----------------+
+| Manager    |     45000.0000 |
+| HR         |     37731.0000 |
+| Analyst    |     35740.0000 |
+| Typist     |     23678.0000 |
+| Clerk      |     37000.0000 |
++------------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> select designaton,sum(salary)as total_salary from employee group by designaton;
++------------+--------------+
+| designaton | total_salary |
++------------+--------------+
+| Manager    |       135000 |
+| HR         |        75462 |
+| Analyst    |        71480 |
+| Typist     |        23678 |
+| Clerk      |        37000 |
++------------+--------------+
+5 rows in set (0.01 sec)
+
+mysql> select designaton,max(salary)as higest_salary,min(salary)as lowest_salary from employee group by designaton;
++------------+---------------+---------------+
+| designaton | higest_salary | lowest_salary |
++------------+---------------+---------------+
+| Manager    |         45000 |         45000 |
+| HR         |         46000 |         29462 |
+| Analyst    |         36000 |         35480 |
+| Typist     |         23678 |         23678 |
+| Clerk      |         37000 |         37000 |
++------------+---------------+---------------+
+5 rows in set (0.00 sec)
+
+mysql> select designaton,avg(salary)as average_salary  from employee where dept_no<>'101' group by designaton;
++------------+----------------+
+| designaton | average_salary |
++------------+----------------+
+| HR         |     37731.0000 |
+| Analyst    |     35740.0000 |
+| Manager    |     45000.0000 |
+| Typist     |     23678.0000 |
+| Clerk      |     37000.0000 |
++------------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> select designaton,avg(salary)as average_salary  from employee where dept_no<>'101' group by designaton having avg(salary)>2000 order by average_salary asc;
++------------+----------------+
+| designaton | average_salary |
++------------+----------------+
+| Typist     |     23678.0000 |
+| Analyst    |     35740.0000 |
+| Clerk      |     37000.0000 |
+| HR         |     37731.0000 |
+| Manager    |     45000.0000 |
++------------+----------------+
+5 rows in set (0.00 sec)
+
+
