@@ -7,6 +7,7 @@ db.products.insertMany([{"id":2,"name":"Tablets","price":799,"releaseDate":ISODa
 {
   acknowledged: true,
   insertedIds: { '0': ObjectId('67f790a139d03bbcd0d861e2') }
+
 db.products.insertMany([{"id":3,"name":"Smartphone","price":899,"releaseDate":ISODate("2022-01-14"),"spec":{"ram":12,"screen":9.7,"cpu":1.66},"color":["blue"],"storage":[16,64,128]}])
 {
   acknowledged: true,
@@ -57,6 +58,7 @@ db.products.insertMany([{"id":3,"name":"Smartphone","price":899,"releaseDate":IS
   }
 ]
 
+
 db.products.find({id:3})
 [
   {
@@ -71,7 +73,8 @@ db.products.find({id:3})
   }
 ]
 
- db.products.findOne()
+ 
+db.products.findOne()
 {
   _id: ObjectId('67f78b1639d03bbcd0d861e0'),
   id: 1,
@@ -83,6 +86,7 @@ db.products.find({id:3})
   storage: [ 64, 128, 256 ]
 }
 
+
 db.products.find({id:2},{name:1,price:1})
 [
   {
@@ -91,6 +95,7 @@ db.products.find({id:2},{name:1,price:1})
     price: 799
   }
 ]
+
 
 db.products.find({price:{$eq:799}})
 [
@@ -116,6 +121,7 @@ db.products.find({price:{$eq:799}})
   }
 ]
 
+
 db.products.deleteOne({id:1})
 { acknowledged: true, deletedCount: 1 }
 
@@ -127,6 +133,7 @@ db.products.find({"spec.ram":{$eq:12}},{name:1,"spec.ram":1})
     spec: { ram: 12 }
   }
 ]
+
 
 db.products.find({"spec.screen":{$lt:7}})
 [
@@ -141,6 +148,7 @@ db.products.find({"spec.screen":{$lt:7}})
     storage: [ 64, 128, 256 ]
   }
 ]
+
 
 db.products.find({price:{$lt:1000}},{name:1,price:1})
 [
@@ -161,6 +169,7 @@ db.products.find({price:{$lt:1000}},{name:1,price:1})
   }
 ]
 
+
 db.products.find({price:{$in:[699,799]}},{name:1,price:1})
 [
   {
@@ -174,6 +183,7 @@ db.products.find({price:{$in:[699,799]}},{name:1,price:1})
     price: 799
   }
 ]
+
 
 
 db.products.find({color:{$in:["black","white"]}})
@@ -201,6 +211,7 @@ db.products.find({color:{$in:["black","white"]}})
 ]
 
 
+
 db.products.find({price:{$nin:[699,799]}},{name:1,price:1})
 [
   {
@@ -209,6 +220,7 @@ db.products.find({price:{$nin:[699,799]}},{name:1,price:1})
     price: 899
   }
 ]
+
 
 
 db.products.find({$and:[{price:799},{color:{$in:["white","black"]}}]},{name:1,price:1,color:1})
@@ -226,6 +238,8 @@ db.products.find({$and:[{price:799},{color:{$in:["white","black"]}}]},{name:1,pr
     color: [ 'white', 'black', 'purple' ]
   }
 ]
+
+
 db.products.find({$or:[{price:{$lt:699} },{price:{$gt:799} }]})
 [
   {
