@@ -1,3 +1,4 @@
+PROGRAM 1:
 mysql> delimiter //
 mysql> CREATE PROCEDURE IncreaseSalary()
     -> BEGIN
@@ -41,7 +42,7 @@ Query OK, 0 rows affected (0.02 sec)
 
 mysql> CALL IncreaseSalary();
 
-
+PROGRAM 2:
 mysql> DELIMITER //
 mysql> CREATE PROCEDURE CalculateBill1()
     -> BEGIN
